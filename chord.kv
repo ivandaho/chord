@@ -1,0 +1,258 @@
+<MainWindowWidget>:
+    window_1: window1
+    window_2: window2
+    window_3: window3
+    window_4: window4
+    pointer_id: pointerid
+    cd_1: cd1
+    cd_2: cd2
+    cd_3: cd3
+    cd_4: cd4
+
+    main_window: mainwindowid
+
+    button_dom: buttondom
+    button_majmin: buttonmajmin
+    button_fastmode: buttonfastmode
+    button_tog: buttontog
+
+    button_C: buttonC
+    button_Cs: buttonCs
+    button_D: buttonD 
+    button_Ds: buttonDs
+    button_E: buttonE
+    button_F: buttonF
+    button_Fs: buttonFs
+    button_G:  buttonG
+    button_Gs: buttonGs
+    button_A: buttonA
+    button_As: buttonAs
+    button_B: buttonB
+
+    id: mainwindowid
+    Scrollable: 
+    # resizing etc is disabled if set to false...
+        do_rotation: False
+        do_scale: False
+        do_translation: False
+        pos: self.pos
+        size: root.size
+        # canvas:
+        #    Color:
+        #        rgba: 0, 1, 1, 0.2
+        #    Rectangle:
+        #        pos: self.pos
+        #        size: self.size
+        GridWindow:
+            cols: 5
+            rows: 5
+            pos: root.pos
+            size: root.size
+            canvas:
+                Color:
+                    rgba: 1, 1, 1, 0.2
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+
+            ChordDisplayer:
+                id: cd1
+                pos: 0, root.height-self.height
+                LabelThing:
+                    id: window1 
+                    font_size: 40
+                    text: 'empty'
+
+            ChordDisplayer:
+                id: cd2
+                pos: 200, root.height-self.height
+                LabelThing:
+                    id: window2
+                    font_size: 40
+                    text: 'empty'
+
+            ChordDisplayer:
+                id: cd3
+                pos: 400, root.height-self.height
+                LabelThing:
+                    id: window3
+                    font_size: 40
+                    text: 'empty'
+
+            ChordDisplayer:
+                id: cd4
+                pos: 600, root.height-self.height
+                LabelThing:
+                    font_size: 40
+                    id: window4
+                    text: 'empty'
+    Pointer:
+        id: pointerid
+        pos: cd1.pos
+        size_hint: None, None
+        size: cd1.size 
+        canvas:
+            Color:
+                rgba: 1, 1, 1, 0.5
+            Triangle:
+                points: (self.center_x, self.y-2, self.center_x-3, self.y-10, self.center_x+3, self.y-10)
+
+    SquareButton:
+        id: buttontog
+        text: 'toggle\nplayback'
+        font_size: 15
+        pos: 100, 0
+        on_release: root.schedtog()
+        background_color: 0.5, 0.5, 0.5, 1
+
+
+#    SmallButton:
+#        text: 'bpm'
+#        font_size: 15
+#        pos: 100, 0
+#        on_release: root.calcbeat()
+
+#    SmallButton:
+#        text: 'test'
+#        font_size: 15
+#        pos: 150, 0
+#        on_release: root.printnotecache()
+
+
+    SquareButton:
+        text: 'this button\nplays a sound'
+        on_release: self.release_1()
+
+    Button_White:
+        id: buttonC
+        pos: 200, 0
+        on_release: root.up_C(0)
+        on_press: root.down_C()
+    Button_White:
+        id: buttonD
+        pos: 290, 0
+        on_release: root.up_D(2)
+        on_press: root.down_D()
+    Button_White:
+        id: buttonE
+        pos: 380, 0
+        on_release: root.up_E(4)
+        on_press: root.down_E()
+    Button_White:
+        id: buttonF
+        pos: 470, 0
+        on_release: root.up_F(5)
+        on_press: root.down_F()
+    Button_White:
+        id: buttonG
+        pos: 560, 0
+        on_release: root.up_G(7)
+        on_press: root.down_G()
+    Button_White:
+        id: buttonA
+        pos: 650, 0
+        on_release: root.up_A(9)
+        on_press: root.down_A()
+    Button_White:
+        id: buttonB
+        pos: 740, 0
+        on_release: root.up_B(11)
+        on_press: root.down_B()
+
+    Button_Black:
+        id: buttonCs
+        pos: 260, 210
+        on_release: root.up_Cs(1)
+        on_press: root.down_Cs()
+    Button_Black:
+        id: buttonDs
+        pos: 350, 210
+        on_release: root.up_Ds(3)
+        on_press: root.down_Ds()
+
+    Button_Black:
+        id: buttonFs
+        pos: 530, 210
+        on_release: root.up_Fs(6)
+        on_press: root.down_Fs()
+    Button_Black:
+        id: buttonGs
+        pos: 620, 210
+        on_release: root.up_Gs(8)
+        on_press: root.down_Gs()
+    Button_Black:
+        id: buttonAs
+        pos: 710, 210
+        on_release: root.up_As(10)
+        on_press: root.down_As()
+
+    SquareButton:
+        text: 'min'
+        id: buttonmajmin
+        color:
+        pos: 0, 100
+        on_release: root.togmajmin()
+        background_color: 255, 0, 0, 0.5
+
+    SquareButton:
+        text: 'dom'
+        id: buttondom
+        color:
+        pos: 100, 100
+        on_release: root.togdom()
+        background_color: 255, 0, 0, 0.5
+
+    SquareButton:
+        text: 'root only'
+        id: buttonfastmode
+        color:
+        pos: 0, 200
+        on_release: root.togfastmode()
+        background_color: 255, 0, 0, 0.5
+
+    Label:
+        text: 'BPM: %s\n4/4 time' % int(slidy.value)
+        text_align: 'left'
+        pos: 100, 380
+        width: 50
+        size_hint: None, None
+    BPMSlider:
+        id: slidy
+        value: 120
+        range: (60,830) 
+        step: 1
+        pos: 70, 300
+        width: 300
+        size_hint: None, None
+<ChordDisplayer>:
+    size_hint: None, None
+    size: 200, 200
+    canvas:
+        Color:
+            rgba: 0.12, 0.16, 0.2, 1.0
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+<SquareButton@Button>:
+    font_size: 10
+    size_hint: None, None
+    size: 100, 100
+
+<SmallButton@Button>:
+    font_size: 12
+    size_hint: None, None
+    size: 50, 50
+
+<Button_White@Button>:
+    size_hint: None, None
+    size: 90, 450
+    background_color: 255, 255, 255, 1
+    # text: 'p\ni\na\nn\no\n\nk\ne\ny'
+
+<Button_Black@Button>:
+    size_hint: None, None
+    size: 60, 240
+    background_color: 0, 0, 0, 1
+    # text: 'p\ni\na\nn\no\n\nk\ne\ny'
+
